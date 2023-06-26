@@ -3,8 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common import keys
 import time
 
-# 2
-
 
 def test_petfriends(selenium):
     # Open PetFriends base page:
@@ -13,7 +11,7 @@ def test_petfriends(selenium):
     time.sleep(3)  # just for demo purposes, do NOT repeat it on real projects!
 
     # click on the new user button
-    btn_new_user = selenium.find_element (By.XPATH, '//button[@onclick=\"document.location='/new_user';\"]')
+    btn_new_user = selenium.find_element(By.XPATH, "/html/body/div/div/div[2]/button")
 
     btn_new_user.click()
 
