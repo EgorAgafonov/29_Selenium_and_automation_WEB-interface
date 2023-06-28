@@ -80,31 +80,35 @@ import time
 #
 #     assert  web_browser.current_url == 'https://petfriends.skillfactory.ru/all_pets',"login error"
 
+
 @pytest.fixture(autouse=True)
 def testing():
-    pytest.driver = webdriver.Chrome('/chromedriver.exe')
+    pytest.driver = webdriver.Chrome('tests/chromedriver.exe')
     pytest.driver.get('http://petfriends.skillfactory.ru/login')
-
     yield
-
     pytest.driver.quit()
 
 
 def test_show_my_pets():
     pytest.driver.find_element(By.ID, "email").send_keys('fonovagafonov@yandex.ru')
-    time.sleep(1)
+    time.sleep(2)
 
     pytest.driver.find_element(By.ID, "pass").send_keys('123456')
-    time.sleep(1)
+    time.sleep(2)
 
     pytest.driver.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
     assert pytest.driver.find_element(By.TAG_NAME, "h1").text == "PetFriends"
 
-    images = pytest.driver.find_elements(By.XPATH, '//img[@class="card-img-top"]')
-    names = pytest.driver.find_elements(By.XPATH, '//h5[@class="card-title"]')
-    descriptions = pytest.driver.find_elements(By.XPATH, '//p[@class="card-text"]')
+    images = pytest.driver.find_elements(By.CSS_SELECTOR, '.card-deck .card-img-top')
+    names = pytest.driver.find_elements(By.CSS_SELECTOR, '.card-deck .card-title')
+    descriptions = pytest.driver.find_elements(By.CSS_SELECTOR, '.card-deck .card-text')
 
     for i in range(len(names)):
         assert images[i].get_attribute('src') != ''
         assert names[i].text != ''
         assert descriptions[i].text != ''
+        assert ', ' in descriptions[i]
+        parts = descriptions[i].text.split(", ")
+        assert len(parts[0]) > 0
+        assert len(parts[1]) > 0
+
