@@ -7,9 +7,9 @@ import pytest
 import pytest_selenium
 import time
 
-driver = webdriver.Chrome('tests/chromedriver.exe')
-driver.get('http://petfriends.skillfactory.ru/login')
 
+driver = webdriver.Chrome('путь до драйвера/chromedriver.exe')
+driver.get('http://petfriends.skillfactory.ru/login')
 
 
                                                  # Неявные ожидания
@@ -45,7 +45,6 @@ def test_implicitly_wait_my_pets():
     driver.get('https://petfriends.skillfactory.ru/all_pets')
     pet_age = driver.find_element(By.CSS_SELECTOR, '.card-deck .card-text')
     assert pet_age.text != ''
-
 
                                                 # Явные ожидания
 
