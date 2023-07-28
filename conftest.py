@@ -16,7 +16,7 @@
 # def web_browser(request, selenium):
 #
 #     browser = selenium
-#     browser.set_window_size(1400, 1000)
+#     browser.set_window_size(640, 480)
 #
 #     # Return browser instance to test case:
 #     yield browser

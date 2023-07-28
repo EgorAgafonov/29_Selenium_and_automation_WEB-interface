@@ -8,6 +8,7 @@ def test_google():
     driver = webdriver.Chrome()
     driver.get('https://www.google.com')
     try:
-        element = WebDriverWait(driver, 3).until(EC.title_is('Google'))
+        element = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH,
+        'body/div[1]/div[2]/div[1]/img')))
     except:
         print("some error happen !!")
